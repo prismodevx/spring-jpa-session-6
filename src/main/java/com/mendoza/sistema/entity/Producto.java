@@ -7,7 +7,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -15,18 +14,22 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "categorias")
+@Table(name = "productos")
 @EntityListeners(AuditingEntityListener.class)
-public class Categoria {
+public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "nombre", length = 50, nullable = false)
+    @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
 
-    @OneToMany(mappedBy = "categoria")
-    private Set<Producto> productos;
+    @Column(name = "descripcion", length = 255)
+    private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
 
     @Column(name = "activo", columnDefinition = "default 1", nullable = false)
     private int activo;
