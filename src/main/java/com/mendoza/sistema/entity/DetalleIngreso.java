@@ -2,12 +2,12 @@ package com.mendoza.sistema.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.IdGeneratorType;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -15,29 +15,31 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "categorias")
-@EntityListeners(AuditingEntityListener.class)
-public class Categoria {
+@Table(name = "Detalle Ingreso")
+public class DetalleIngreso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "nombre", length = 50, nullable = false)
-    private String nombre;
+    @Column(name = "ingresoId", nullable = true)
+    private int ingresoId;
 
-    @OneToMany(mappedBy = "categoria")
-    private Set<Producto> productos;
+    @Column(name = "productoId", nullable = true)
+    private int productoId;
 
-    @Column(name = "activo", columnDefinition = "default 1", nullable = false)
-    private int activo;
+    @Column(name = "cantidad", length = 6, nullable = true)
+    private int cantidad;
 
-    @Column(name = "created_at")
+    @Column(name = "productounitario", nullable = true)
+    private int productoUnitario;
+
+    @Column(name="created_at")
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name="updated_at")
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    private Date updatedAt;
+    private Date updateAt;
 }
