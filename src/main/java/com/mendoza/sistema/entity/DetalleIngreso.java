@@ -21,11 +21,13 @@ public class DetalleIngreso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "ingresoId", nullable = true)
-    private int ingresoId;
+    @ManyToOne
+    @JoinColumn(name = "ingresoId", nullable = false)
+    private Ingreso ingresoId;
 
-    @Column(name = "productoId", nullable = true)
-    private int productoId;
+    @ManyToOne
+    @JoinColumn(name = "productoId", nullable = false)
+    private Producto productoId;
 
     @Column(name = "cantidad", length = 6, nullable = true)
     private int cantidad;

@@ -33,8 +33,9 @@ public class Ingreso {
     @Column(name = "total", nullable = true)
     private Float total;
 
-    @Column(name = "usuarioId")
-    private int usuarioId;
+    @ManyToOne
+    @JoinColumn(name = "usuarioId", nullable = false)
+    private Usuario usuarioId;
 
     @Column(name="created_at")
     @Temporal(TemporalType.TIMESTAMP)
